@@ -11,8 +11,8 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
     twitterStream = subprocess.Popen(['sh', './TwitterSide.sh'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-    await twitterStream.wait()
-    response = await twitterStream.stdout.readlines()
+    twitterStream.wait()
+    response = twitterStream.stdout.readlines()
     print(response)
 
 
