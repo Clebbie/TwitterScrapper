@@ -10,7 +10,7 @@ client = discord.Client()
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-    twitterStream = await subprocess.Popen(['sh', 'TwitterSide.sh'], cwd='/home/PycharmProjects/TwitterScrapper/', stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    twitterStream = await subprocess.Popen(['sh', './TwitterSide.sh'], cwd='/home/PycharmProjects/TwitterScrapper', stdout=subprocess.PIPE, stdin=subprocess.PIPE)
     await twitterStream.wait()
     response = await twitterStream.stdout.readlines()
     print(response)
