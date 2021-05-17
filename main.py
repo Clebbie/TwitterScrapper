@@ -14,11 +14,12 @@ testChannelID = 843136959819808769
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     testChannel = client.get_channel(843136959819808769)
-
-    twitterStream = subprocess.Popen(['sh', './TwitterSide.sh'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-    twitterStream.wait()
-    # open("streamBuffer.txt","r")
-    response = twitterStream.stdout.readlines()
+    subProcess = subprocess.Popen(['sh', "python3 TwitterSide.py"],
+                                  cwd="/home/PycharmProjects/TwitterScraper",
+                                  stdout=subprocess.PIPE,
+                                  stdin=subprocess.PIPE)
+    subProcess.wait()
+    response = subProcess.stdout.readlines()
     print(response)
 
 
