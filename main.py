@@ -20,7 +20,7 @@ async def on_ready():
     # print(response)
     while True:
         await check_stream()
-        await time.sleep(5)
+        time.sleep(5)
 
 @client.event
 async def on_message(message):
