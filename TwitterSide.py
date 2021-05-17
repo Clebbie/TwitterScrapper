@@ -73,9 +73,11 @@ def get_stream(headers, set, bearer_token):
                 response.status_code, response.text
             )
         )
+    # bufferFile = open("streamBuffer.txt", "a+")
     for response_line in response.iter_lines():
         if response_line:
             json_response = json.loads(response_line)
+            # bufferFile.write(json.dumps(json_response, indent=4, sort_keys=True))
             print(json.dumps(json_response, indent=4, sort_keys=True))
 
 

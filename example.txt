@@ -1,0 +1,16 @@
+{"data": [{"id": "1394077689414303744", "value": "from:theOnlyYarnBall", "tag": "gamer"}, {"id": "1394077689414303745", "value": "from:BTS_twt", "tag": "bts"}], "meta": {"sent": "2021-05-16T23:58:43.285Z"}}
+{"meta": {"sent": "2021-05-16T23:58:44.551Z", "summary": {"deleted": 2, "not_deleted": 0}}}
+{"data": [{"value": "from:theOnlyYarnBall", "tag": "gamer", "id": "1394079904854069252"}, {"value": "from:BTS_twt", "tag": "bts", "id": "1394079904854069253"}], "meta": {"sent": "2021-05-16T23:58:46.133Z", "summary": {"created": 2, "not_created": 0, "valid": 2, "invalid": 0}}}
+200
+{
+    "data": {
+        "id": "1394079982566133760",
+        "text": "Test 6"
+    },
+    "matching_rules": [
+        {
+            "id": 1394079904854069252,
+            "tag": "gamer"
+        }
+    ]
+}

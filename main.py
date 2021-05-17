@@ -9,11 +9,14 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    testChannel = client.get_channel(843136959819808769)
 
-    twitterStream = subprocess.Popen(['sh', './TwitterSide.sh'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-    twitterStream.wait()
-    response = twitterStream.stdout.readlines()
-    print(response)
+    # twitterStream = subprocess.Popen(['sh', './TwitterSide.sh'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    # twitterStream.wait()
+    # open("streamBuffer.txt","r")
+    # response = twitterStream.stdout.readlines()
+    # print(response)
+    check_stream()
 
 
 @client.event
@@ -23,6 +26,16 @@ async def on_message(message):
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+
+
+async def check_stream():
+    subProcess = subprocess.Popen(['sh', "./readStream.sh"],
+                                  stdout=subprocess.PIPE,
+                                  stdin=subprocess.PIPE)
+    subProcess.wait()
+    response = subProcess.stdout.readlines()
+    print(response)
+    response = [line.decode('utf-8') for line in response]
 
 
 client.run(TOKEN)
