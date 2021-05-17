@@ -4,6 +4,7 @@ import subprocess
 
 TOKEN = 'ODQzMTMzOTY5OTM1NzYxNDI4.YJ_bsw.3oOKwHa5E3ciY6s9hM5Dwqm2hgE'
 client = discord.Client()
+testChannelID = 843136959819808769
 
 
 @client.event
@@ -16,7 +17,7 @@ async def on_ready():
     # open("streamBuffer.txt","r")
     # response = twitterStream.stdout.readlines()
     # print(response)
-    check_stream()
+    await check_stream()
 
 
 @client.event
@@ -35,6 +36,8 @@ async def check_stream():
     subProcess.wait()
     response = subProcess.stdout.readlines()
     print(response)
+    client.get_channel(testChannelID).send(response)
+
     response = [line.decode('utf-8') for line in response]
 
 
