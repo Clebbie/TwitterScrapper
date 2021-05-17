@@ -32,12 +32,12 @@ async def on_message(message):
 
 @tasks.loop(seconds=10)
 async def check_stream():
-    subProcess = subprocess.Popen(['sh', "./readStream.sh"],
+    subProcess = subprocess.Popen(['sh', "python3 TwitterSide.py"],
+                                  cwd="/home/PycharmProjects/TwitterScraper",
                                   stdout=subprocess.PIPE,
                                   stdin=subprocess.PIPE)
     subProcess.wait()
     response = subProcess.stdout.readlines()
-    await clear_stream()
 
 
     response = [line.decode('utf-8') for line in response]
