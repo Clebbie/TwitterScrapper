@@ -1,3 +1,5 @@
+import sys
+
 import requests
 import os
 import json
@@ -19,7 +21,7 @@ def get_rules(headers, bearer_token):
         raise Exception(
             "Cannot get rules (HTTP {}): {}".format(response.status_code, response.text)
         )
-    print(json.dumps(response.json()))
+    sys.stdout.write(json.dumps(response.json()))
     return response.json()
 
 
@@ -40,7 +42,7 @@ def delete_all_rules(headers, bearer_token, rules):
                 response.status_code, response.text
             )
         )
-    print(json.dumps(response.json()))
+    sys.stdout.write(json.dumps(response.json()))
 
 
 def set_rules(headers, delete, bearer_token):
@@ -59,14 +61,14 @@ def set_rules(headers, delete, bearer_token):
         raise Exception(
             "Cannot add rules (HTTP {}): {}".format(response.status_code, response.text)
         )
-    print(json.dumps(response.json()))
+    sys.stdout.write(json.dumps(response.json()))
 
 
 def get_stream(headers, set, bearer_token):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
     )
-    print(response.status_code)
+    sys.stdout.write(response.status_code)
     if response.status_code != 200:
         raise Exception(
             "Cannot get stream (HTTP {}): {}".format(
@@ -79,7 +81,7 @@ def get_stream(headers, set, bearer_token):
             json_response = json.loads(response_line)
             # bufferFile.write("hahahahahahahahah this works!")
             # bufferFile.write(json.dumps(json_response, indent=4, sort_keys=True))
-            print(json.dumps(json_response, indent=4, sort_keys=True))
+            sys.stdout.write(json.dumps(json_response, indent=4, sort_keys=True))
 
 
 def main():
