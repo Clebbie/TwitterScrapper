@@ -1,6 +1,7 @@
 import discord
 import os
 import subprocess
+import time
 
 TOKEN = 'ODQzMTMzOTY5OTM1NzYxNDI4.YJ_bsw.3oOKwHa5E3ciY6s9hM5Dwqm2hgE'
 client = discord.Client()
@@ -17,8 +18,9 @@ async def on_ready():
     # open("streamBuffer.txt","r")
     # response = twitterStream.stdout.readlines()
     # print(response)
-    await check_stream()
-
+    while True:
+        await check_stream()
+        await time.sleep(5)
 
 @client.event
 async def on_message(message):
