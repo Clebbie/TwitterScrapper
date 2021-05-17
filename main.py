@@ -35,10 +35,11 @@ async def check_stream():
                                   stdin=subprocess.PIPE)
     subProcess.wait()
     response = subProcess.stdout.readlines()
-    print(response)
-    client.get_channel(testChannelID).send(response)
+
 
     response = [line.decode('utf-8') for line in response]
+    print(response)
+    await client.get_channel(testChannelID).send(response)
 
 
 client.run(TOKEN)
