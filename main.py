@@ -15,7 +15,7 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     testChannel = client.get_channel(843136959819808769)
     subProcess = subprocess.Popen(['sh', "python3 TwitterSide.py"],
-                                  cwd="/home/PycharmProjects/TwitterScraper",
+                                  cwd="/home/PycharmProjects/TwitterScrapper",
                                   stdout=subprocess.PIPE,
                                   stdin=subprocess.PIPE)
     subProcess.wait()
