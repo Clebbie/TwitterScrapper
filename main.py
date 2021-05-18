@@ -28,7 +28,7 @@ async def on_ready():
                                      stdin=subprocess.PIPE)
 
     check_stream.start()
-    tweet_lookup.start()
+    tweet_lookup.start(rawTweetQ)
     await testChannel.send('We are locked and loaded!')
 
 
