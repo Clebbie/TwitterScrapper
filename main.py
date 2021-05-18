@@ -21,7 +21,7 @@ async def on_ready():
                                      stdout=subprocess.PIPE,
                                      stdin=subprocess.PIPE)
 
-    testChannel.send('We are locked and loaded!')
+    await testChannel.send('We are locked and loaded!')
 
 
 @client.event
