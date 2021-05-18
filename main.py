@@ -35,7 +35,7 @@ async def on_message(message):
 
 @tasks.loop(seconds=2)
 async def check_stream():
-    response = requests.get('http://127.0.0.1:5000')
+    response = requests.get('http://127.0.0.1:5000/tweets')
     if 'status' in response.json():
         return
     await client.get_channel(testChannelID).send(response.json())
