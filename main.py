@@ -32,7 +32,7 @@ async def on_ready():
     await testChannel.send('We are locked and loaded!')
 
 
-@tasks.loop(2)
+@tasks.loop(seconds=2)
 async def tweet_lookup(rawTweet):
     if len(rawTweetQ) != 0:
         headers = {"Authorization": "Bearer {}".format(BEARER_TOKEN)}
