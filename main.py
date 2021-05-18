@@ -18,7 +18,6 @@ API_SECRET = 'ia3NoMRV4hsGXtVBafxsj269T97Uy5v1X6CPkdprjkgguxrIiS'
 BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAK6yPgEAAAAAT1yaXbs9II3eUoVnke7KpmVFKBI%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB'
 
 
-
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -29,22 +28,22 @@ async def on_ready():
                                      stdin=subprocess.PIPE)
 
     check_stream.start()
+    tweet_lookup.start()
     await testChannel.send('We are locked and loaded!')
 
-    while True:
-        if len(rawTweetQ) != 0:
-            await tweet_lookup(rawTweetQ)
 
-
+@tasks.loop(2)
 async def tweet_lookup(rawTweet):
-    headers = {"Authorization": "Bearer {}".format(BEARER_TOKEN)}
-    fields = 'tweet.fields=lang,author_id,text,attachments'
-    id = rawTweet['data']['id']
-    url = 'https://api.twitter.com/2/tweets?{}&{}'.format(id,fields)
+    if len(rawTweetQ) != 0:
+        headers = {"Authorization": "Bearer {}".format(BEARER_TOKEN)}
+        fields = 'tweet.fields=lang,author_id,text,attachments'
+        id = rawTweet['data']['id']
+        url = 'https://api.twitter.com/2/tweets?{}&{}'.format(id, fields)
 
-    response = requests.request('GET',url, headers=headers)
-    message = response.json()
-    await client.get_channel(testChannelID).send(message)
+        response = requests.request('GET', url, headers=headers)
+        message = response.json()
+        await client.get_channel(testChannelID).send(message)
+
 
 @client.event
 async def on_message(message):
