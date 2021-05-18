@@ -2,6 +2,7 @@ import discord
 import os
 import subprocess
 import time
+import requests
 
 from discord.ext import tasks
 
@@ -19,9 +20,8 @@ async def on_ready():
                                      cwd="/home/caleb/PycharmProjects/TwitterScrapper",
                                      stdout=subprocess.PIPE,
                                      stdin=subprocess.PIPE)
-    twitterStream.wait()
-    response = twitterStream.stdout.readlines()
-    print(response)
+
+    testChannel.send('We are locked and loaded!')
 
 
 @client.event
@@ -33,10 +33,12 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
 
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=2)
 async def check_stream():
-    response = twitterStream.stdout.readlines()
-    await client.get_channel(testChannelID).send(response)
+    response = requests.get('http://127.0.0.1:5000')
+    if 'status' in response.json():
+        return
+    await client.get_channel(testChannelID).send(response.json())
 
 
 async def clear_stream():
