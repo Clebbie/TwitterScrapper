@@ -3,6 +3,7 @@ import sys
 import requests
 import os
 import json
+import sys
 
 API_KEY = 'XXRtnvNOBZh0KZw4p32TpWsWO'
 API_SECRET = 'ia3NoMRV4hsGXtVBafxsj269T97Uy5v1X6CPkdprjkgguxrIiS'
@@ -46,11 +47,13 @@ def delete_all_rules(headers, bearer_token, rules):
 
 
 def set_rules(headers, delete, bearer_token):
-    # You can adjust the rules if needed
-    sample_rules = [
-        {"value": "from:BTS_twt", "tag": "bts"},
-        {"value": "from:theOnlyYarnBall", "tag": "gamer"},
-    ]
+    # You can adjust the rules if
+    file = open('handles.txt', 'r')
+    handles = file.readlines()
+    sample_rules = []
+    for name in handles:
+        sample_rules.append({'value': name, 'tag': 'user_add'})
+ 
     payload = {"add": sample_rules}
     response = requests.post(
         "https://api.twitter.com/2/tweets/search/stream/rules",
