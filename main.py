@@ -21,6 +21,7 @@ async def on_ready():
                                      stdout=subprocess.PIPE,
                                      stdin=subprocess.PIPE)
 
+    check_stream.start()
     await testChannel.send('We are locked and loaded!')
 
 
