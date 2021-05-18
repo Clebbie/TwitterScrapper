@@ -14,14 +14,15 @@ twitterStream = None
 
 API_KEY = 'XXRtnvNOBZh0KZw4p32TpWsWO'
 API_SECRET = 'ia3NoMRV4hsGXtVBafxsj269T97Uy5v1X6CPkdprjkgguxrIiS'
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAK6yPgEAAAAAT1yaXbs9II3eUoVnke7KpmVFKBI%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB'
+BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAK6yPgEAAAAAT1yaXbs9II3eUoVnke7KpmVFKBI' \
+               '%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB '
 
 
 @client.event
 async def on_ready():
 	print('We have logged in as {0.user}'.format(client))
 	testChannel = client.get_channel(843136959819808769)
-	twitterStream = await start_twitter_side()
+	await start_twitter_side()
 
 	check_stream.start()
 	# tweet_lookup.start()
@@ -29,15 +30,16 @@ async def on_ready():
 
 
 async def start_twitter_side():
-	return subprocess.Popen(['python3', 'TwitterSide.py'],
-	                        cwd="/home/caleb/PycharmProjects/TwitterScrapper",
+	return subprocess.Popen(['sh', './TwitterSide.sh'],
 	                        stdout=subprocess.PIPE,
 	                        stdin=subprocess.PIPE)
 
 
 async def restart_twitter_side():
-
-	twitterStream = await start_twitter_side()
+	subprocess.Popen(['sh', './stop_TwitterSide.sh'],
+	                 stdout=subprocess.PIPE,
+	                 stdin=subprocess.PIPE
+	                 )
 
 
 @client.event
