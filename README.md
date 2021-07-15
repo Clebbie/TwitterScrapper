@@ -10,7 +10,7 @@ The first is the discord bot. It must be added to discord channels and told wher
 
 Next is the Twitter Filtered Stream. This is the stream from twitter that listens for posts according to a given set of rules. The rules can be large and complex, but there are limitations becasue i'm currently using the free version.
 
-Lastly, there is the internal web server. It acts as the inbetween for twitter and discord. This way, the twitter stream has somewhere that is always listening for POST requests while discord can do it own thing. The discord bot will check every two seconds for any data in the stream, and if some is found, it will post it!
+Lastly, there is the internal web server. It acts as the in between for twitter and discord. This way, the twitter stream has somewhere that is always listening for POST requests while discord can do it own thing. The discord bot will check every two seconds for any data in the stream, and if some is found, it will post it!
 
 
 TODO: improve documentation with links to twitter filtered stream api
