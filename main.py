@@ -1,9 +1,7 @@
 import discord
-import os
 import subprocess
-import time
 import requests
-import json
+
 
 from discord.ext import tasks
 
@@ -50,23 +48,34 @@ async def on_message(message):
 	if message.content.startswith('!add'):
 		handleList = message.content.split(' ')[1]
 		await add_handle_to_stream(handleList.split(','))
+	elif message.content.startswith('!help'):
+		helpMessage = 'To add a twitter handle to be followed simply say: !add {handle}\n Ex: !add CalebYarnell\n' \
+		              'To see all handles being followed currently say: !who'
+		await client.get_channel(testChannelID).send(helpMessage)
+	elif message.content.startswith('!about'):
+		aboutMessage = 'TwitterReadr was developed by Caleb Yarnell for his lovely girlfriend :)\n TwitterReadr streams' \
+		               'tweets from user added handles and cross posts it to a discord channel so you never miss the tweets' \
+		               'you care about!'
+		await client.get_channel(testChannelID).send(aboutMessage)
 
 
 async def add_handle_to_stream(handles):
 	handles_to_add = []
 	for name in handles:
-		handles_to_add.append({'value': 'from:{}'.format(name), 'tag': 'user_add'})
+		handles_to_add.append({'value': 'from:{}'.format(name.replace(' ', '')), 'tag': 'user_add'})
 
 	req = requests.post('https://api.twitter.com/2/tweets/search/stream/rules',
 	                    headers={'Content-type': 'application/json', 'Authorization': 'Bearer {}'.format(BEARER_TOKEN)},
 	                    json={'add': handles_to_add})
 
 	if req.status_code != 201:
+		await client.get_channel(testChannelID).send('Failed to add some messages :/ GET AN ADMIN!')
 		raise Exception(
 			"Cannot add rules (HTTP {}): {}".format(
 				req.status_code, req.text
 			)
 		)
+	client.get_channel(testChannelID).send('Successfully added all given handles!')
 
 
 @tasks.loop(seconds=2)
