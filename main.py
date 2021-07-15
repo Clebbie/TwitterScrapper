@@ -48,14 +48,25 @@ async def on_message(message):
 		return
 
 	if message.content.startswith('!add'):
-		handleList = message.content.split(' ')
-		file = open('handles.txt', 'a+')
-		for name in handleList:
-			file.write(name + '\n')
+		handleList = message.content.split(' ')[1]
+		await add_handle_to_stream(handleList.split(','))
 
-		twitterStream.kill()
-		await restart_twitter_side()
-		await message.channel.send('Hello!')
+
+async def add_handle_to_stream(handles):
+	handles_to_add = []
+	for name in handles:
+		handles_to_add.append({'value': name, 'tag': 'user_add'})
+
+	req = requests.post('https://api.twitter.com/2/tweets/search/stream/rules',
+	                    headers={'Content-type': 'application/json', 'Autherization': BEARER_TOKEN},
+	                    json={'add': handles_to_add})
+
+	if req.status_code != 200:
+		raise Exception(
+			"Cannot delete rules (HTTP {}): {}".format(
+				req.status_code, req.text
+			)
+		)
 
 
 @tasks.loop(seconds=2)
