@@ -55,15 +55,15 @@ async def on_message(message):
 async def add_handle_to_stream(handles):
 	handles_to_add = []
 	for name in handles:
-		handles_to_add.append({'value': name, 'tag': 'user_add'})
+		handles_to_add.append({'value': 'from:{}'.format(name), 'tag': 'user_add'})
 
 	req = requests.post('https://api.twitter.com/2/tweets/search/stream/rules',
 	                    headers={'Content-type': 'application/json', 'Authorization': 'Bearer {}'.format(BEARER_TOKEN)},
 	                    json={'add': handles_to_add})
 
-	if req.status_code != 200:
+	if req.status_code != 201:
 		raise Exception(
-			"Cannot delete rules (HTTP {}): {}".format(
+			"Cannot add rules (HTTP {}): {}".format(
 				req.status_code, req.text
 			)
 		)
