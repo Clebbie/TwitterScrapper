@@ -25,7 +25,7 @@ echo "Executing server start command..."
 #       is found. Minecraft expects it to be in the directory which the java
 #       command to start the server is called.
 
-tmux new -d -s twitterReadr "python3 TwitterSide.py"
+tmux new -d -s twitterReadr "python3 ../bin/TwitterSide.py"
 
 echo "done."
 exit 0

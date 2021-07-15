@@ -1,8 +1,7 @@
-import discord
 import subprocess
+
+import discord
 import requests
-
-
 from discord.ext import tasks
 
 TOKEN = 'ODQzMTMzOTY5OTM1NzYxNDI4.YJ_bsw.3oOKwHa5E3ciY6s9hM5Dwqm2hgE'
@@ -28,13 +27,13 @@ async def on_ready():
 
 
 async def start_twitter_side():
-	return subprocess.Popen(['sh', './TwitterSide.sh'],
+	return subprocess.Popen(['sh', './ShellCommands/TwitterSide.sh'],
 	                        stdout=subprocess.PIPE,
 	                        stdin=subprocess.PIPE)
 
 
 async def restart_twitter_side():
-	subprocess.Popen(['sh', './stop_TwitterSide.sh'],
+	subprocess.Popen(['sh', './ShellCommands/stop_TwitterSide.sh'],
 	                 stdout=subprocess.PIPE,
 	                 stdin=subprocess.PIPE
 	                 )
@@ -88,7 +87,7 @@ async def check_stream():
 
 
 async def clear_stream():
-	subProcess = subprocess.Popen(['sh', "./clearStream.sh"],
+	subProcess = subprocess.Popen(['sh', "./ShellCommands/clearStream.sh"],
 	                              stdout=subprocess.PIPE,
 	                              stdin=subprocess.PIPE)
 
