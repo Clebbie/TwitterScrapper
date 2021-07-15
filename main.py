@@ -15,7 +15,7 @@ twitterStream = None
 API_KEY = 'XXRtnvNOBZh0KZw4p32TpWsWO'
 API_SECRET = 'ia3NoMRV4hsGXtVBafxsj269T97Uy5v1X6CPkdprjkgguxrIiS'
 BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAK6yPgEAAAAAT1yaXbs9II3eUoVnke7KpmVFKBI' \
-               '%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB '
+               '%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB'
 
 
 @client.event
@@ -58,7 +58,7 @@ async def add_handle_to_stream(handles):
 		handles_to_add.append({'value': name, 'tag': 'user_add'})
 
 	req = requests.post('https://api.twitter.com/2/tweets/search/stream/rules',
-	                    headers={'Content-type': 'application/json', 'Autherization': BEARER_TOKEN},
+	                    headers={'Content-type': 'application/json', 'Authorization': 'Bearer {}'.format(BEARER_TOKEN)},
 	                    json={'add': handles_to_add})
 
 	if req.status_code != 200:
