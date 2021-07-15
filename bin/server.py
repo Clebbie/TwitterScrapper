@@ -1,7 +1,6 @@
-from flask import *
-import os
-import requests
 import json
+
+from flask import *
 
 app = Flask(__name__)
 tweetQ = []

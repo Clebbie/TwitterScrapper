@@ -1,18 +1,15 @@
 import subprocess
+import sys
 
 import discord
 import requests
 from discord.ext import tasks
 
-TOKEN = 'ODQzMTMzOTY5OTM1NzYxNDI4.YJ_bsw.3oOKwHa5E3ciY6s9hM5Dwqm2hgE'
 client = discord.Client()
 testChannelID = 843136959819808769
 twitterStream = None
 
-API_KEY = 'XXRtnvNOBZh0KZw4p32TpWsWO'
-API_SECRET = 'ia3NoMRV4hsGXtVBafxsj269T97Uy5v1X6CPkdprjkgguxrIiS'
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAK6yPgEAAAAAT1yaXbs9II3eUoVnke7KpmVFKBI' \
-               '%3DdU9prVHy1ahBL0ZubzrNHlbTvOP5GLlhZBVXGSEfNy8W9FTXJB'
+BEARER_TOKEN = sys.argv[2]
 
 
 @client.event
@@ -92,4 +89,4 @@ async def clear_stream():
 	                              stdin=subprocess.PIPE)
 
 
-client.run(TOKEN)
+client.run(sys.argv[1])
