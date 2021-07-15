@@ -6,6 +6,8 @@
 # SESSION     - The name of the tmux sessions running the minecraft server
 #
 SESSION="twitterReadr"
+CLIENT_TOKEN= echo "$TWITTER_READR_DISCORD_TOKEN"
+BEARER_TOKEN= echo "$TWITTER_BEARER_TOKEN"
 
 
 # Verify server is not running
@@ -25,7 +27,8 @@ echo "Executing server start command..."
 #       is found. Minecraft expects it to be in the directory which the java
 #       command to start the server is called.
 
-tmux new -d -s twitterReadr "python3 ../bin/main.py $TWITTER_READR_DISCORD_TOKEN $TWITTER_BEARER_TOKEN"
+# shellcheck disable=SC2027
+tmux new -d -s twitterReadr "python3 ../bin/main.py $CLIENT_TOKEN $BEARER_TOKEN"
 
 echo "done."
 exit 0
