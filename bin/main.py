@@ -7,10 +7,10 @@ from discord.ext import tasks
 
 
 def load_secret_tokens():
-	with open('../config.yaml', 'r') as stream:
+	with open('./bin/config.yaml', 'r') as stream:
 		try:
-			secrets = yaml.safe_load(stream)
-			return secrets
+			yaml_file = yaml.safe_load(stream)
+			return yaml_file
 		except yaml.YAMLError as exc:
 			print(exc)
 			return ''

@@ -130,4 +130,4 @@ dmypy.json
 
 
 # Bot tokens
-config.yaml
+bin/config.yaml
