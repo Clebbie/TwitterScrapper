@@ -6,8 +6,6 @@
 # SESSION     - The name of the tmux sessions running the minecraft server
 #
 SESSION="twitterReadr"
-CLIENT_TOKEN= echo "$TWITTERREADR_TOKEN"
-BEARER_TOKEN= echo "$TWITTER_BEARER_TOKEN"
 
 
 # Verify server is not running
@@ -28,7 +26,7 @@ echo "Executing server start command..."
 #       command to start the server is called.
 
 # shellcheck disable=SC2027
-tmux new -d -s twitterReadr "python3 ../bin/main.py $CLIENT_TOKEN $BEARER_TOKEN"
+tmux new -d -s twitterReadr "python3 ../bin/main.py"
 
 echo "done."
 exit 0
