@@ -6,7 +6,7 @@
 # SESSION     - The name of the tmux sessions running the minecraft server
 #
 SESSION="twitterReadr"
-CLIENT_TOKEN= echo "$TWITTER_READR_DISCORD_TOKEN"
+CLIENT_TOKEN= echo "$TWITTERREADR_TOKEN"
 BEARER_TOKEN= echo "$TWITTER_BEARER_TOKEN"
 
 

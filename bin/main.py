@@ -1,15 +1,30 @@
 import subprocess
-import sys
 
 import discord
 import requests
+import yaml
 from discord.ext import tasks
+
+
+def load_secret_tokens():
+	with open('../config.yaml', 'r') as stream:
+		try:
+			secrets = yaml.safe_load(stream)
+			return secrets
+		except yaml.YAMLError as exc:
+			print(exc)
+			return ''
+
 
 client = discord.Client()
 testChannelID = 843136959819808769
 twitterStream = None
 
-BEARER_TOKEN = sys.argv[2]
+secrets = load_secret_tokens()
+if not secrets:
+	print('NO SECRETS!!! BIG FAILURE!!!')
+
+BEARER_TOKEN = secrets['twitter']['bearer']
 
 
 @client.event
@@ -89,4 +104,4 @@ async def clear_stream():
 	                              stdin=subprocess.PIPE)
 
 
-client.run(sys.argv[1])
+client.run(secrets['discord']['client_token'])
