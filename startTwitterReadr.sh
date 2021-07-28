@@ -26,7 +26,7 @@ echo "Executing server start command..."
 #       command to start the server is called.
 
 # shellcheck disable=SC2027
-tmux new -d -s twitterReadr "python3 ../bin/main.py"
+tmux new -d -s twitterReadr "python3 ./bin/main.py"
 
 echo "done."
 exit 0
